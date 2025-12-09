@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="profile-header">
+    <h1>👤 Edit Your Profile</h1>
+    <p>Help your Secret Santa choose the perfect gift by sharing your preferences!</p>
+  </div>
+
+  <div class="profile-form-container">
+    <%= form_with model: current_user, url: profile_path, method: :patch, local: true, class: "profile-form" do |f| %>
+      <% if current_user.errors.any? %>
+        <div class="error-messages">
+          <h3><%= pluralize(current_user.errors.count, "error") %> prohibited this profile from being saved:</h3>
+          <ul>
+            <% current_user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :username, "Username *" %>
+        <%= f.text_field :username, class: "form-control", placeholder: "Choose a unique username", required: true %>
+        <small class="form-text">Letters, numbers, and underscores only (3-20 characters)</small>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, "Email *" %>
+        <%= f.email_field :email, class: "form-control", readonly: true %>
+        <small class="form-text">Email cannot be changed</small>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :preferences, "Your Preferences & Interests" %>
+        <%= f.text_area :preferences, class: "form-control", rows: 8, placeholder: "Share your interests, hobbies, favorite colors, allergies, or anything that would help your Secret Santa choose a great gift!\n\nFor example:\n- I love reading mystery novels\n- Favorite color: Blue\n- Allergic to nuts\n- Enjoy coffee and tea\n- Hobbies: Photography, hiking" %>
+        <small class="form-text">Be as detailed as you'd like! This helps your Secret Santa pick the perfect gift.</small>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Save Profile", class: "btn btn-primary" %>
+        <%= link_to "Cancel", root_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="profile-tips">
+    <h3>💡 Tips for Great Preferences</h3>
+    <ul>
+      <li>Mention your favorite hobbies and interests</li>
+      <li>Share your favorite colors, scents, or flavors</li>
+      <li>List any allergies or dietary restrictions</li>
+      <li>Include things you collect or are passionate about</li>
+      <li>Mention your favorite books, movies, or music genres</li>
+      <li>Be specific but not too restrictive - give your Secret Santa creative freedom!</li>
+    </ul>
+  </div>
+</div>

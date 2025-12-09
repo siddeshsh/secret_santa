@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="spin-header">
+    <h1>🎅 Secret Santa Spin Wheel 🎅</h1>
+    <p>Spin the wheel to discover who you'll be gifting to!</p>
+  </div>
+
+  <div class="spin-container">
+    <div class="spin-wheel-wrapper" data-controller="spin">
+      <div class="spin-wheel" data-spin-target="wheel">
+        <div class="wheel-center">
+          <div class="wheel-pointer">▼</div>
+        </div>
+        <div class="wheel-segments">
+          <% @available_users.each_with_index do |user, index| %>
+            <div class="wheel-segment" style="transform: rotate(<%= index * (360.0 / @available_users.length) %>deg)">
+              <span class="segment-text"><%= user.username || user.email.split('@').first %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="spin-button-container">
+        <%= button_to "SPIN!", spin_path, method: :post, class: "btn btn-spin", data: { spin_target: "button", action: "click->spin#spinWheel" } %>
+      </div>
+    </div>
+
+    <div class="spin-info">
+      <h3>How It Works</h3>
+      <ol>
+        <li>Click the "SPIN!" button to start the wheel</li>
+        <li>The wheel will spin and randomly select a person</li>
+        <li>You'll see their name and preferences</li>
+        <li>Remember: Keep it a secret until December 22nd! 🤫</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="spin-rules">
+    <h3>⚠️ Important Reminders</h3>
+    <ul>
+      <li>You can only spin once - choose wisely!</li>
+      <li>Budget limit: Rs 300</li>
+      <li>Consider their preferences when choosing a gift</li>
+      <li>Keep your assignment confidential</li>
+      <li>Bring your gift on December 22nd</li>
+    </ul>
+  </div>
+</div>

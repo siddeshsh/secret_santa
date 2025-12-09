@@ -1,0 +1,44 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>🎄 Join the Gift Exchange</h2>
+      <p>Create your account to participate in the festive fun!</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="form-group">
+        <%= f.label :username, "Username *" %>
+        <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: "Choose a unique username" %>
+        <small class="form-text">Letters, numbers, and underscores only (3-20 characters)</small>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, "Email *" %>
+        <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "your.email@example.com" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, "Password *" %>
+        <% if @minimum_password_length %>
+        <small class="form-text">(<%= @minimum_password_length %> characters minimum)</small>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Enter a secure password" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirm Password *" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Re-enter your password" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Sign Up", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+
+    <div class="auth-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

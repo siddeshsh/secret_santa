@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="result-header">
+    <h1>🎁 Your Secret Santa Assignment 🎁</h1>
+    <p>Here's who you'll be gifting to!</p>
+  </div>
+
+  <% if @assignment %>
+    <div class="result-card">
+      <div class="result-icon">🎅</div>
+      <h2>You're Secret Santa for:</h2>
+      <div class="assigned-user">
+        <h3><%= @assigned_user.username || @assigned_user.email.split('@').first %></h3>
+      </div>
+
+      <div class="preferences-section">
+        <h4>Their Preferences & Interests:</h4>
+        <% if @assigned_user.preferences.present? %>
+          <div class="preferences-content">
+            <%= simple_format(@assigned_user.preferences) %>
+          </div>
+        <% else %>
+          <div class="no-preferences">
+            <p>This person hasn't added their preferences yet. Consider asking them about their interests (subtly!) or choose something universally appreciated!</p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="gift-tips">
+        <h4>💡 Gift Ideas & Tips</h4>
+        <ul>
+          <li>Budget: Rs 300 (stick to it!)</li>
+          <li>Consider their hobbies and interests</li>
+          <li>Personalized gifts show extra thought</li>
+          <li>When in doubt, gift cards or treats work well</li>
+          <li>Wrap it nicely - presentation matters!</li>
+        </ul>
+      </div>
+
+      <div class="reminder-box">
+        <strong>🤫 Remember:</strong> Keep this assignment SECRET until the reveal on December 22nd!
+      </div>
+
+      <div class="result-actions">
+        <%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
+        <%= link_to "Edit My Profile", profile_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="no-assignment">
+      <div class="no-assignment-icon">❌</div>
+      <h2>No Assignment Yet</h2>
+      <p>You haven't spun the wheel yet! Head over to the spin page to get your Secret Santa assignment.</p>
+      <%= link_to "Spin the Wheel", spin_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

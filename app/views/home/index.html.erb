@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="header">
+    <h1>🎄 Festive Office Gift Exchange 🎄</h1>
+    <p class="subtitle">Spread joy and celebrate the holiday season with your colleagues!</p>
+  </div>
+
+  <% if @reminders.any? %>
+    <div class="reminders">
+      <% @reminders.each do |reminder| %>
+        <div class="reminder-card">
+          <span class="reminder-icon">🔔</span>
+          <div class="reminder-content">
+            <strong><%= reminder[:event] %></strong>
+            <p><%= reminder[:message] %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="events-grid">
+    <% @events.each do |event| %>
+      <div class="event-card <%= event[:color] %>">
+        <div class="event-icon"><%= event[:icon] %></div>
+        <h2><%= event[:title] %></h2>
+        <div class="event-date"><%= event[:date] %></div>
+        <p class="event-description"><%= event[:description] %></p>
+        <div class="event-budget">
+          <strong>Budget:</strong> <%= event[:budget] %>
+        </div>
+        
+        <% if event[:title] == "Secret Santa" %>
+          <div class="event-action">
+            <% if current_user.has_secret_santa_assignment? %>
+              <%= link_to "View Your Assignment", result_spin_path, class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to "Spin the Wheel!", spin_path, class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="info-section">
+    <h3>How to Participate</h3>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-number">1</div>
+        <h4>Update Your Profile</h4>
+        <p>Add your preferences and interests to help your Secret Santa choose the perfect gift!</p>
+        <%= link_to "Edit Profile", profile_path, class: "btn btn-secondary" %>
+      </div>
+      
+      <div class="info-card">
+        <div class="info-number">2</div>
+        <h4>Handmade & Funny Santa</h4>
+        <p>Bring your handmade or funny gifts on the respective dates. No assignments needed!</p>
+      </div>
+      
+      <div class="info-card">
+        <div class="info-number">3</div>
+        <h4>Secret Santa</h4>
+        <p>Spin the wheel to get your Secret Santa assignment and see their preferences!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rules-section">
+    <h3>Important Rules</h3>
+    <ul class="rules-list">
+      <li>Keep your Secret Santa assignment confidential until December 22nd</li>
+      <li>Stick to the budget limits for each event</li>
+      <li>Be thoughtful and considerate with your gift choices</li>
+      <li>All gifts should be appropriate for a professional setting</li>
+      <li>Have fun and spread holiday cheer! 🎉</li>
+    </ul>
+  </div>
+</div>

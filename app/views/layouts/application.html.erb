@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Gift Exchange - Festive Office Event" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Gift Exchange">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <%= link_to root_path, class: "brand-link" do %>
+            <span class="brand-icon">🎄</span>
+            <span class="brand-text">Gift Exchange</span>
+          <% end %>
+        </div>
+        
+        <div class="nav-menu">
+          <% if user_signed_in? %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
+            <%= link_to "My Profile", profile_path, class: "nav-link" %>
+            <%= link_to "Secret Santa", spin_path, class: "nav-link" %>
+            <div class="nav-user">
+              <span class="user-icon">👤</span>
+              <span class="user-name"><%= current_user.username || current_user.email.split('@').first %></span>
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-signout" %>
+            </div>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path, class: "btn btn-signin" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-signup" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert alert-danger">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; <%= Time.current.year %> Office Gift Exchange | Spreading Holiday Cheer 🎅</p>
+      </div>
+    </footer>
+  </body>
+</html>
