@@ -4,21 +4,21 @@ class HomeController < ApplicationController
   def index
     @events = [
       {
-        title: "Handmade Santa",
+        title: "Handmade / Funny Santa",
         date: "December 18th",
-        description: "Gift something you've made yourself - a knitted scarf, homemade card, baked treat, or any creative item!",
+        description: "Gift something you've made yourself or humorous or silly -  funny mug, prank item, a knitted scarf, homemade card, baked treat, or any creative item!",
         budget: "No budget constraint",
-        icon: "🎨",
+        icon: "🎨 / 😄",
         color: "handmade"
       },
-      {
-        title: "Funny Santa",
-        date: "December 19th",
-        description: "Gift something humorous or silly - a funny mug, prank item, or quirky gadget to spread laughter!",
-        budget: "Rs 100",
-        icon: "😄",
-        color: "funny"
-      },
+      # {
+      #   title: "Funny Santa",
+      #   date: "December 19th",
+      #   description: "Gift something humorous or silly - a funny mug, prank item, or quirky gadget to spread laughter!",
+      #   budget: "Rs 100",
+      #   icon: "😄",
+      #   color: "funny"
+      # },
       {
         title: "Secret Santa",
         date: "December 22nd",
@@ -39,18 +39,18 @@ class HomeController < ApplicationController
     reminders = []
 
     if today == Date.new(2024, 12, 18)
-      reminders << { event: "Handmade Santa", message: "Don't forget to bring your handmade gift today!" }
-    elsif today == Date.new(2024, 12, 19)
-      reminders << { event: "Funny Santa", message: "Time to share some laughs! Bring your funny gift today!" }
+      reminders << { event: "Handmade / Funny Santa", message: "Don't forget to bring your handmade or a funny gift today!" }
+    # elsif today == Date.new(2024, 12, 19)
+    #   reminders << { event: "Funny Santa", message: "Time to share some laughs! Bring your funny gift today!" }
     elsif today == Date.new(2024, 12, 22)
       reminders << { event: "Secret Santa", message: "It's Secret Santa day! Bring your thoughtful gift!" }
     end
 
     # Reminder for upcoming events
-    if today >= Date.new(2024, 12, 15) && today < Date.new(2024, 12, 18)
-      reminders << { event: "Upcoming", message: "Handmade Santa is coming up on December 18th!" }
-    elsif today >= Date.new(2024, 12, 18) && today < Date.new(2024, 12, 19)
-      reminders << { event: "Upcoming", message: "Funny Santa is tomorrow, December 19th!" }
+    if today >= Date.new(2024, 12, 17) && today < Date.new(2024, 12, 18)
+      reminders << { event: "Upcoming", message: "Handmade / Funny  Santa is coming up on December 18th!" }
+    # elsif today >= Date.new(2024, 12, 18) && today < Date.new(2024, 12, 19)
+    #   reminders << { event: "Upcoming", message: "Funny Santa is tomorrow, December 19th!" }
     elsif today >= Date.new(2024, 12, 19) && today < Date.new(2024, 12, 22)
       reminders << { event: "Upcoming", message: "Secret Santa is coming up on December 22nd!" }
     end
