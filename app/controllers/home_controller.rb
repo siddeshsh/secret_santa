@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @events = [
       {
         title: "Handmade / Funny Santa",
-        date: "December 18th",
+        date: "December 19th",
         description: "Gift something you've made yourself or humorous or silly -  funny mug, prank item, a knitted scarf, homemade card, baked treat, or any creative item!",
         budget: "No budget constraint",
         icon: "🎨 / 😄",
@@ -47,11 +47,11 @@ class HomeController < ApplicationController
     end
 
     # Reminder for upcoming events
-    if today >= Date.new(2024, 12, 17) && today < Date.new(2024, 12, 18)
+    if today >= Date.new(2024, 12, 16) && today < Date.new(2024, 12, 19)
       reminders << { event: "Upcoming", message: "Handmade / Funny  Santa is coming up on December 18th!" }
     # elsif today >= Date.new(2024, 12, 18) && today < Date.new(2024, 12, 19)
     #   reminders << { event: "Upcoming", message: "Funny Santa is tomorrow, December 19th!" }
-    elsif today >= Date.new(2024, 12, 19) && today < Date.new(2024, 12, 22)
+    elsif today >= Date.new(2024, 12, 20) && today < Date.new(2024, 12, 22)
       reminders << { event: "Upcoming", message: "Secret Santa is coming up on December 22nd!" }
     end
 
