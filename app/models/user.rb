@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_many :assigned_users, through: :assignments, source: :assigned_to
   has_many :reverse_assignments, class_name: 'Assignment', foreign_key: 'assigned_to_id', dependent: :destroy
+  has_many :messages, foreign_key: :sender_id, dependent: :destroy
 
   # Validations
   validates :email, format: { with: /\A.*@(?:rubyvision\.tech|chemicasoft\.com)\z/i, message: "must be from @rubyvision.tech or @chemicasoft.com domain" }

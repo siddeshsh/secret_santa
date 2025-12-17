@@ -31,7 +31,7 @@ class InitTableScheme < ActiveRecord::Migration[7.0]
     add_foreign_key "assignments", "users", column: "assigned_to_id"
   end
 
-  def def down 
+  def down
     drop_table :assignments
     drop_table :users
   end

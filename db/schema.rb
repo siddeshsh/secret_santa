@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_12_09_071215) do
+ActiveRecord::Schema[7.0].define(version: 2025_12_10_000000) do
   create_table "assignments", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "assigned_to_id", null: false
@@ -21,6 +21,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_09_071215) do
     t.index ["assigned_to_id"], name: "index_assignments_on_assigned_to_id"
     t.index ["user_id", "event_type"], name: "index_assignments_on_user_id_and_event_type", unique: true
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "messages", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "assignment_id", null: false
+    t.bigint "sender_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignment_id", "created_at"], name: "index_messages_on_assignment_id_and_created_at"
+    t.index ["assignment_id"], name: "index_messages_on_assignment_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -40,4 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_09_071215) do
 
   add_foreign_key "assignments", "users"
   add_foreign_key "assignments", "users", column: "assigned_to_id"
+  add_foreign_key "messages", "assignments"
+  add_foreign_key "messages", "users", column: "sender_id"
 end

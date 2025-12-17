@@ -1,6 +1,7 @@
 class Assignment < ApplicationRecord
   belongs_to :user
   belongs_to :assigned_to, class_name: 'User'
+  has_many :messages, dependent: :destroy
 
   validates :event_type, presence: true
   validates :user_id, uniqueness: { scope: :event_type }
