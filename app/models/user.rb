@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :reverse_assignments, class_name: 'Assignment', foreign_key: 'assigned_to_id', dependent: :destroy
 
   # Validations
+  validates :email, format: { with: /\A.*@(?:rubyvision\.tech|chemicasoft\.com)\z/i, message: "must be from @rubyvision.tech or @chemicasoft.com domain" }
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }, allow_blank: true
   validates :username, format: { with: /\A[a-zA-Z0-9_]+\z/, message: "only allows letters, numbers, and underscores" }, allow_blank: true
 
