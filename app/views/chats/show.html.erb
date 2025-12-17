@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="chat-page">
+    <div class="chat-header">
+      <div>
+        <h1>Anonymous Chat</h1>
+        <p class="chat-role">You are chatting as <strong><%= @is_santa ? "Secret Santa" : "Recipient" %></strong></p>
+        <p class="chat-partner">
+          <%= @is_santa ? "With: #{(@assignment.assigned_to.username || @assignment.assigned_to.email.split('@').first)}" : "With: Your Secret Santa" %>
+        </p>
+      </div>
+      <div class="chat-actions-inline">
+        <%= link_to "Back", root_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+
+    <%= turbo_stream_from @assignment %>
+
+    <div class="chat-window" data-controller="chat" data-chat-current-user-id-value="<%= current_user.id %>">
+      <div id="chat-errors"></div>
+      <div id="<%= dom_id(@assignment, :messages) %>" class="chat-messages" data-chat-target="messages">
+        <%= render @messages %>
+      </div>
+
+      <%= form_with model: [@assignment, @message], data: { action: "turbo:submit-end->chat#resetForm" }, class: "chat-form" do |f| %>
+        <div class="chat-input">
+          <%= f.text_area :body, rows: 2, class: "form-control chat-textarea", placeholder: "Write a message…", required: true %>
+          <%= f.submit "Send", class: "btn btn-primary chat-send-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

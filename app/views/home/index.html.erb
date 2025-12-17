@@ -18,6 +18,17 @@
     </div>
   <% end %>
 
+  <% if incoming_assignment %>
+    <div class="reminder-card">
+      <span class="reminder-icon">💬</span>
+      <div class="reminder-content">
+        <strong>Chat with Your Secret Santa</strong>
+        <p>Start an anonymous conversation to share hints or ask questions.</p>
+        <%= link_to "Open Chat", chat_assignment_path(incoming_assignment), class: "btn btn-primary mt-1" %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="events-grid">
     <% @events.each do |event| %>
       <div class="event-card <%= event[:color] %>">
@@ -33,6 +44,9 @@
           <div class="event-action">
             <% if current_user.has_secret_santa_assignment? %>
               <%= link_to "View Your Assignment", result_spin_path, class: "btn btn-primary" %>
+              <% if (assignment = current_user.secret_santa_assignment) %>
+                <%= link_to "Open Chat", chat_assignment_path(assignment), class: "btn btn-secondary mt-1" %>
+              <% end %>
             <% else %>
               <%= link_to "Spin the Wheel!", spin_path, class: "btn btn-primary" %>
             <% end %>
