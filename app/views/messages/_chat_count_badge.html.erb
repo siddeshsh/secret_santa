@@ -1,0 +1,2 @@
+<% count = count.to_i %>
+<span id="chat-count-<%= assignment.id %>" class="chat-count-badge <%= 'is-hidden' if count.zero? %>"><%= count if count.positive? %></span>

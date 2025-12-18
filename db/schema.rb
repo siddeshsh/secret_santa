@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_12_10_000000) do
+ActiveRecord::Schema[7.0].define(version: 2025_12_10_000001) do
   create_table "assignments", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "assigned_to_id", null: false
@@ -29,7 +29,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_10_000000) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "read_at"
     t.index ["assignment_id", "created_at"], name: "index_messages_on_assignment_id_and_created_at"
+    t.index ["assignment_id", "read_at"], name: "index_messages_on_assignment_id_and_read_at"
     t.index ["assignment_id"], name: "index_messages_on_assignment_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :assignments, only: [] do
     member do
       get :chat, to: 'chats#show'
+      post :read_chat, to: 'chats#read'
     end
     resources :messages, only: [:create]
   end

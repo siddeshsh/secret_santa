@@ -1,3 +1,5 @@
+<%= turbo_stream_from "chat_unread_counts_user_#{current_user.id}" %>
+
 <div class="container">
   <div class="header">
     <h1>🎄 Festive Office Gift Exchange 🎄</h1>
@@ -24,7 +26,11 @@
       <div class="reminder-content">
         <strong>Chat with Your Secret Santa</strong>
         <p>Start an anonymous conversation to share hints or ask questions.</p>
-        <%= link_to "Open Chat", chat_assignment_path(incoming_assignment), class: "btn btn-primary mt-1" %>
+        <% incoming_count = chat_other_messages_count(incoming_assignment) %>
+        <%= link_to chat_assignment_path(incoming_assignment), class: "btn btn-primary mt-1 chat-count-button" do %>
+          Open Chat
+          <%= render "messages/chat_count_badge", assignment: incoming_assignment, count: incoming_count %>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -45,7 +51,11 @@
             <% if current_user.has_secret_santa_assignment? %>
               <%= link_to "View Your Assignment", result_spin_path, class: "btn btn-primary" %>
               <% if (assignment = current_user.secret_santa_assignment) %>
-                <%= link_to "Open Chat", chat_assignment_path(assignment), class: "btn btn-secondary mt-1" %>
+                <% assignment_count = chat_other_messages_count(assignment) %>
+                <%= link_to chat_assignment_path(assignment), class: "btn btn-secondary mt-1 chat-count-button" do %>
+                  Open Chat
+                  <%= render "messages/chat_count_badge", assignment: assignment, count: assignment_count %>
+                <% end %>
               <% end %>
             <% else %>
               <%= link_to "Spin the Wheel!", spin_path, class: "btn btn-primary" %>

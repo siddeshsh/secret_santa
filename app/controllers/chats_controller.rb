@@ -9,6 +9,12 @@ class ChatsController < ApplicationController
     @is_santa = current_user.id == @assignment.user_id
   end
 
+  def read
+    @assignment.messages.unread_for(current_user).update_all(read_at: Time.current)
+    @assignment.broadcast_unread_count_for(current_user)
+    head :ok
+  end
+
   private
 
   def set_assignment

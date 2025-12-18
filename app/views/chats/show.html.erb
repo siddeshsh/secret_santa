@@ -15,7 +15,7 @@
 
     <%= turbo_stream_from @assignment %>
 
-    <div class="chat-window" data-controller="chat" data-chat-current-user-id-value="<%= current_user.id %>">
+    <div class="chat-window" data-controller="chat" data-chat-current-user-id-value="<%= current_user.id %>" data-chat-read-url-value="<%= read_chat_assignment_path(@assignment) %>">
       <div id="chat-errors"></div>
       <div id="<%= dom_id(@assignment, :messages) %>" class="chat-messages" data-chat-target="messages">
         <%= render @messages %>
